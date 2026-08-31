@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+header {
+  height: 72px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  background: #000;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+button,
+.btn {
+  border: 1px solid #fff;
+  background: #fff;
+  color: #000;
+  padding: 11px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hero {
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  padding: 8%;
+  background: linear-gradient(110deg, #000 40%, #171717);
+}
+
+.eyebrow {
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(58px, 11vw, 130px);
+  line-height: 0.85;
+  letter-spacing: -5px;
+}
+
+h1 span {
+  color: #aaa;
+}
+
+.hero p:not(.eyebrow) {
+  margin: 25px 0;
+  font-size: 18px;
+  color: #bbb;
+}
+
+.products-section {
+  padding: 80px 6%;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 35px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.product {
+  background: #111;
+  border: 1px solid #222;
+  overflow: hidden;
+}
+
+.product img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #222;
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.price {
+  color: #bbb;
+  margin-bottom: 14px;
+}
+
+.add {
+  width: 100%;
+}
+
+.about {
+  padding: 80px 6%;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+}
+
+.about p {
+  max-width: 650px;
+  color: #aaa;
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  nav {
+    display: none;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    min-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-section,
+  .about {
+    padding: 55px 5%;
+  }
+
+  h1 {
+    letter-spacing: -3px;
+  }
+}
