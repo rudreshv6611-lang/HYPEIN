@@ -1,63 +1,144 @@
-    const products = [
+
+/* =========================
+   HYPEIN - JAVASCRIPT
+   ========================= */
+
+const products = [
   {
-    name: "HYPEIN Essential Tee",
-    price: 799,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80"
+    name: "HYPEIN Oversized T-Shirt",
+    price: 999,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
   },
   {
-    name: "HYPEIN Oversized Hoodie",
+    name: "HYPEIN Black Hoodie",
     price: 1299,
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80"
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
   },
   {
-    name: "HYPEIN Street Jacket",
-    price: 1799,
-    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80"
+    name: "HYPEIN Streetwear Shirt",
+    price: 1099,
+    image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=800&q=80"
   },
   {
-    name: "HYPEIN Black Cargo",
-    price: 1199,
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
+    name: "HYPEIN Premium Tee",
+    price: 899,
+    image: "https://images.unsplash.com/photo-1583743814966-8936f37f384c?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
-let cart = 0;
+let cart = [];
 
-const grid = document.getElementById("productGrid");
-const count = document.getElementById("cartCount");
+const productGrid = document.getElementById("productGrid");
+const cartCount = document.getElementById("cartCount");
+const cartBtn = document.getElementById("cartBtn");
 
-products.forEach((product) => {
-  const card = document.createElement("article");
-  card.className = "product";
 
-  card.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <div class="product-info">
-      <h3>${product.name}</h3>
-      <div class="price">₹${product.price}</div>
-      <button class="add">ADD TO CART</button>
-    </div>
-  `;
+/* =========================
+   DISPLAY PRODUCTS
+   ========================= */
 
-  card.querySelector(".add").addEventListener("click", () => {
-    cart++;
-    count.textContent = cart;
+function displayProducts() {
 
-    const button = card.querySelector(".add");
-    button.textContent = "ADDED ✓";
+  productGrid.innerHTML = "";
 
-    setTimeout(() => {
-      button.textContent = "ADD TO CART";
-    }, 900);
+  products.forEach((product, index) => {
+
+    const card = document.createElement("div");
+
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+        loading="lazy"
+      >
+
+      <div class="product-info">
+
+        <h3>${product.name}</h3>
+
+        <p>₹${product.price}</p>
+
+        <button
+          class="add-to-cart"
+          onclick="addToCart(${index})"
+        >
+          ADD TO CART
+        </button>
+
+      </div>
+    `;
+
+    productGrid.appendChild(card);
+
+  });
+}
+
+
+/* =========================
+   ADD TO CART
+   ========================= */
+
+function addToCart(index) {
+
+  cart.push(products[index]);
+
+  updateCartCount();
+
+  alert(products[index].name + " added to cart!");
+}
+
+
+/* =========================
+   UPDATE CART COUNT
+   ========================= */
+
+function updateCartCount() {
+
+  cartCount.textContent = cart.length;
+
+}
+
+
+/* =========================
+   CART BUTTON
+   ========================= */
+
+cartBtn.addEventListener("click", function () {
+
+  if (cart.length === 0) {
+
+    alert("Your cart is empty.");
+
+    return;
+
+  }
+
+  let message = "YOUR HYPEIN CART\n\n";
+
+  cart.forEach((item, index) => {
+
+    message +=
+      `${index + 1}. ${item.name} - ₹${item.price}\n`;
+
   });
 
-  grid.appendChild(card);
+  const total = cart.reduce(
+    (sum, item) => sum + item.price,
+    0
+  );
+
+  message += `\nTOTAL: ₹${total}`;
+
+  alert(message);
+
 });
 
-document.getElementById("cartBtn").addEventListener("click", () => {
-  if (cart > 0) {
-    alert(`You have ${cart} item(s) in your cart.`);
-  } else {
-    alert("Your cart is empty.");
-  }
-});
+
+/* =========================
+   START WEBSITE
+   ========================= */
+
+displayProducts();
+updateCartCount();
